@@ -1,7 +1,5 @@
 // Jonathan, Max, Oscar
 
-String[] map = loadStrings("map.txt");
-
 PVector position, velocity, acceleration;
 
 boolean left = false;
