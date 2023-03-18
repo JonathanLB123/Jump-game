@@ -15,7 +15,13 @@ class player extends gameObject {
     if (position.x < -50){
       position.x = width + 50;
     }
+    
+    if(position.y > 800){
+      position.y -= position.y - 800;
+    }
+  }
 
+  void gravety(){
     if (position.y < 800) {
       acceleration.set(0, 1);
       tuchGrass = false;
@@ -24,9 +30,25 @@ class player extends gameObject {
       velocity.y = 0;
       tuchGrass = true;
     }
+  }
+
+  void move(){
     
-    if(position.y > 800){
-      position.y -= position.y - 800;
+    
+    if(velocity.x < 20 && velocity.x > -20){
+      if (right) {
+       acceleration.x = 2;
+      } else if (left) {
+        acceleration.x = -2;
+      } else {
+        acceleration.x = 0;
+      }
+    } else {
+      acceleration.x = 0;
+    }
+
+    if (jump && tuchGrass) {
+      velocity.y = -20;
     }
 
     if (velocity.x > 0) {
@@ -34,19 +56,8 @@ class player extends gameObject {
     } else if (velocity.x < 0) {
       velocity.x += 1;
     }
-
-    if (right) {
-      acceleration.x = 2;
-    } else if (left) {
-      acceleration.x = -2;
-    } else {
-      acceleration.x = 0;
-    }
-    
-    if (jump && tuchGrass) {
-      velocity.y = -20;
-    }
   }
+
 }
 
 void keyPressed() {
