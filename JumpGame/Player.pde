@@ -1,5 +1,5 @@
 class player extends gameObject {
-
+  boolean tuchGrass = false;
 
   player() {
   }
@@ -24,16 +24,19 @@ class player extends gameObject {
   void gravety(){
     if (position.y < 800) {
       acceleration.set(0, 1);
-      tuchGrass = false;
     } else {
       acceleration.y = 0;
       velocity.y = 0;
-      tuchGrass = true;
     }
   }
 
   void move(){
     
+    if(velocity.y == 0){
+      tuchGrass = true;
+    } else {
+      tuchGrass = false;
+    }
     
     if(velocity.x < 20 && velocity.x > -20){
       if (right) {
