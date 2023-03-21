@@ -1,11 +1,6 @@
 // Jonathan, Max, Oscar
 
-map world = new map();
-
-String[] temp;
-char[][] worldMap = new char[30][100];
-
-PVector position, velocity, acceleration;
+ArrayList<Tile> tiles = new ArrayList<Tile>();
 
 boolean left = false;
 boolean right = false;
@@ -15,29 +10,53 @@ gameLogic game = new gameLogic();
 player player1 = new player();
 
 void setup() {
-  fullScreen();
+  size(1500,700);
+  
+  generateTiles(tiles);
 
-  temp = loadStrings("map.txt");
-
-  for(int i = 0; i < temp.length; i++){
-    worldMap[i] = temp[i].toCharArray();
-  }
-
-  position = new PVector();
-  velocity = new PVector();
-  acceleration = new PVector();
 }
 
 void draw() {
   background(0, 0, 20);
-  
-  world.display();
+
+  for (int i = 0; i < tiles.size(); i++){
+    Tile t = tiles.get(i);
+    t.display();
+  }
 
   player1.update();
   player1.display();
   player1.gravety();
   player1.move();
-  
-  stroke(255);
-  line(0,880,width,880);
+}
+
+void generateTiles(ArrayList<Tile> tiles){
+  // tiles.add(new Tile(0,0,20,20));
+  // tiles.add(new Tile(1480,680,20,20));
+  String[] fileLines = loadStrings("map.txt");
+
+  int foundStartX = 0;
+  int foundStartY = 0;
+  for (int i = 0; i < fileLines.length; i++){
+    char[] line = fileLines[i].toCharArray();
+
+    for(int j = 0; j < line.length; j++) {
+     // for(int j=0 ; j< tiles.size() ; j++){
+      switch (line[j]) {
+        case '1' :
+          foundStartX = j * 20;
+          foundStartY = i * 20;
+        break;	
+        case '2' : 
+        break;
+          
+        case '3' :
+          int tileWid = j * 20 - foundStartX + 20;
+          int tileHei = 20;
+          tiles.add(new Tile(foundStartX, foundStartY, tileWid, tileHei));
+        break;	
+      } 
+
+    }
+  }
 }

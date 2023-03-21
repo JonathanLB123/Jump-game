@@ -1,28 +1,32 @@
 class player extends gameObject {
   boolean tuchGrass = false;
 
+  int playerHeight = 80;
+  int playerWidth = 50;
+
   player() {
   }
 
   void display() {
+
     fill(255);
-    rect(position.x, position.y, 50, 80);
+    rect(position.x, position.y, playerWidth, playerHeight);
     
-    if (position.x > width + 50){
-      position.x = - 50;
+    if (position.x > width + playerWidth){
+      position.x = - playerWidth;
     }
     
-    if (position.x < -50){
-      position.x = width + 50;
+    if (position.x < -playerWidth){
+      position.x = width + playerWidth;
     }
     
-    if(position.y > 800){
-      position.y -= position.y - 800;
+    if(position.y > height){
+      position.y -= position.y - height;
     }
   }
 
   void gravety(){
-    if (position.y < 800) {
+    if (position.y + playerHeight < height) {
       acceleration.set(0, 1);
     } else {
       acceleration.y = 0;
