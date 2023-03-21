@@ -1,0 +1,3 @@
+class enemy extends gameObject{
+  
+}
