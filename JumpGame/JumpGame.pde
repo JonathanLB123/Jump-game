@@ -24,6 +24,7 @@ void draw() {
     t.display();
   }
 
+  player1.colider(tiles);
   player1.update();
   player1.display();
   player1.gravety();
@@ -52,7 +53,7 @@ void generateTiles(ArrayList<Tile> tiles){
           
         case '3' :
           int tileWid = j * 20 - foundStartX + 20;
-          int tileHei = 20;
+          int tileHei = 30;
           tiles.add(new Tile(foundStartX, foundStartY, tileWid, tileHei));
         break;	
       } 
