@@ -10,7 +10,7 @@ class player extends gameObject {
   void display() {
 
     fill(255);
-    rect(position.x, position.y, playerWidth, playerHeight);
+    rect(position.x, position.y - playerHeight, playerWidth, playerHeight);
     
     if (position.x > width + playerWidth){
       position.x = - playerWidth;
@@ -26,7 +26,7 @@ class player extends gameObject {
   }
 
   void gravety(){
-    if (position.y + playerHeight < height) {
+    if (position.y < height && !tuchGrass) {
       acceleration.set(0, 1);
     } else {
       acceleration.y = 0;
@@ -34,13 +34,18 @@ class player extends gameObject {
     }
   }
 
-  void move(){
-    
-    if(velocity.y == 0){
-      tuchGrass = true;
-    } else {
-      tuchGrass = false;
+  void colider(ArrayList<Tile> tyler){
+    for(int i = 0; i < tyler.size(); i++){
+      if(position.y > tyler.get(i).y && position.y < tyler.get(i).y+tyler.get(i).tileHeight && position.x + playerWidth > tyler.get(i).x && position.x < tyler.get(i).x+tyler.get(i).tileWidth){
+        tuchGrass = true;
+        position.y -= position.y - tyler.get(i).y;
+      } else {
+        tuchGrass = false;
+      }
     }
+  }
+
+  void move(){
     
     if(velocity.x < 20 && velocity.x > -20){
       if (right) {
@@ -54,7 +59,7 @@ class player extends gameObject {
       acceleration.x = 0;
     }
 
-    if (jump && tuchGrass) {
+    if (jump) {
       velocity.y = -20;
     }
 
