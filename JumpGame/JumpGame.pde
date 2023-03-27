@@ -24,16 +24,14 @@ void draw() {
     t.display();
   }
 
-  player1.colider(tiles);
   player1.update();
   player1.display();
   player1.gravety();
   player1.move();
+  player1.colider(tiles);
 }
 
 void generateTiles(ArrayList<Tile> tiles){
-  // tiles.add(new Tile(0,0,20,20));
-  // tiles.add(new Tile(1480,680,20,20));
   String[] fileLines = loadStrings("map.txt");
 
   int foundStartX = 0;
@@ -42,7 +40,6 @@ void generateTiles(ArrayList<Tile> tiles){
     char[] line = fileLines[i].toCharArray();
 
     for(int j = 0; j < line.length; j++) {
-     // for(int j=0 ; j< tiles.size() ; j++){
       switch (line[j]) {
         case '1' :
           foundStartX = j * 20;
