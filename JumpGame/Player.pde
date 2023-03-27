@@ -12,12 +12,12 @@ class player extends gameObject {
     fill(255);
     rect(position.x, position.y - playerHeight, playerWidth, playerHeight);
     
-    if (position.x > width + playerWidth){
+    if (position.x > width +playerWidth){
       position.x = - playerWidth;
     }
     
     if (position.x < -playerWidth){
-      position.x = width + playerWidth;
+      position.x = width +playerWidth;
     }
     
     if(position.y > height){
@@ -26,22 +26,11 @@ class player extends gameObject {
   }
 
   void gravety(){
-    if (position.y < height && !tuchGrass) {
+    if (position.y < height) { 
       acceleration.set(0, 1);
     } else {
       acceleration.y = 0;
       velocity.y = 0;
-    }
-  }
-
-  void colider(ArrayList<Tile> tyler){
-    for(int i = 0; i < tyler.size(); i++){
-      if(position.y > tyler.get(i).y && position.y < tyler.get(i).y+tyler.get(i).tileHeight && position.x + playerWidth > tyler.get(i).x && position.x < tyler.get(i).x+tyler.get(i).tileWidth){
-        tuchGrass = true;
-        position.y -= position.y - tyler.get(i).y;
-      } else {
-        tuchGrass = false;
-      }
     }
   }
 
@@ -59,8 +48,9 @@ class player extends gameObject {
       acceleration.x = 0;
     }
 
-    if (jump) {
-      velocity.y = -20;
+    if (jump && tuchGrass) {
+      velocity.y = -25;
+      tuchGrass = false;
     }
 
     if (velocity.x > 0) {
@@ -70,6 +60,19 @@ class player extends gameObject {
     }
   }
 
+  void colider(ArrayList<Tile> tiles){
+    for(int i = 0; i < tiles.size(); i++){
+      if(position.y > tiles.get(i).y && 
+      position.y < tiles.get(i).y + tiles.get(i).tileHeight && 
+      position.x + playerWidth > tiles.get(i).x && 
+      position.x < tiles.get(i).x + tiles.get(i).tileWidth){
+        position.y -= position.y - tiles.get(i).y;
+        velocity.y = 0;
+        
+        tuchGrass = true;
+      }
+    }
+  }
 }
 
 void keyPressed() {
