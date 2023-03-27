@@ -2,7 +2,7 @@ class player extends gameObject {
   boolean tuchGrass = false;
 
   int playerHeight = 80;
-  int playerWidth = 50;
+  int playerWidth = 40;
 
   player() {
   }
