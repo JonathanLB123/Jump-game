@@ -1,6 +1,7 @@
 // Jonathan, Max, Oscar
 
 ArrayList<Tile> tiles = new ArrayList<Tile>();
+ArrayList<Coin> coins = new ArrayList<Coin>();
 
 boolean left = false;
 boolean right = false;
@@ -24,6 +25,11 @@ void draw() {
     t.display();
   }
 
+  for (int i = 0; i < coins.size(); i++){
+    Coin c = coins.get(i);
+    c.display();
+  }
+
   player1.update();
   player1.display();
   player1.gravety();
@@ -44,8 +50,10 @@ void generateTiles(ArrayList<Tile> tiles){
         case '1' :
           foundStartX = j * 20;
           foundStartY = i * 20;
-        break;	
-        case '2' : 
+        break;
+
+        case 'c' :
+          coins.add(new Coin(j*20, i*20)); 
         break;
           
         case '3' :
