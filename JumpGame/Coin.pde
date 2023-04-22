@@ -4,6 +4,8 @@ class Coin extends gameObject{
     int x;
     int y;
 
+    boolean hit = false;
+
     int coinSize = 20;
     
     Coin(int inX, int inY){
@@ -13,6 +15,18 @@ class Coin extends gameObject{
 
     void display(){
         fill(255);
-        circle(x, y, coinSize);
+        if (player1.position.x < x && 
+        player1.position.x + player1.playerWidth > x &&
+        player1.position.y > y && 
+        player1.position.y - player1.playerHeight < y &&
+        !hit){
+
+            hit = true;
+
+            score++;
+        }
+        if (!hit) {
+            circle(x, y, coinSize);    
+        }
     }
 }
