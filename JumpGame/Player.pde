@@ -66,6 +66,7 @@ class player extends gameObject {
       position.y < tiles.get(i).y + tiles.get(i).tileHeight && 
       position.x + playerWidth > tiles.get(i).x && 
       position.x < tiles.get(i).x + tiles.get(i).tileWidth){
+        
         position.y -= position.y - tiles.get(i).y;
         velocity.y = 0;
         
